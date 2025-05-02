@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leave Request Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 400px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: auto;
+    }
+    h2 { text-align: center; }
+    input, select, textarea, button {
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Leave Request</h2>
+    <form id="leaveForm">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <select id="leaveType" required>
+        <option value="">Select Leave Type</option>
+        <option value="Sick Leave">Sick Leave</option>
+        <option value="Casual Leave">Casual Leave</option>
+        <option value="Maternity Leave">Maternity Leave</option>
+      </select>
+      <textarea id="reason" placeholder="Reason for leave" rows="3" required></textarea>
+      <button type="submit">Submit Request</button>
+    </form>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    const form = document.getElementById('leaveForm');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        leaveType: document.getElementById('leaveType').value,
+        reason: document.getElementById('reason').value
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbwwLhnIKfcAemhsukaiZbRHI-tojNTx-8tVj7hApxExEllNAi72o-XHhnCXEPD_wR4/exec
+', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        status.textContent = 'Leave request submitted!';
+        form.reset();
+      })
+      .catch(() => {
+        status.textContent = 'Error submitting request.';
+      });
+    });
+  </script>
+</body>
+</html>
