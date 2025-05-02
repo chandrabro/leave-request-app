@@ -11,7 +11,8 @@ form.addEventListener('submit', function(e) {
     reason: document.getElementById('reason').value
   };
 
-  fetch('YOUR_GOOGLE_SCRIPT_WEBAPP_URL_HERE', {
+  fetch('https://script.google.com/macros/s/AKfycbwwLhnIKfcAemhsukaiZbRHI-tojNTx-8tVj7hApxExEllNAi72o-XHhnCXEPD_wR4/exec
+', {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
